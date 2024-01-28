@@ -1,0 +1,15 @@
+services:
+  api-viz:
+    image: httpd:latest
+    volumes:
+      - "./out:/usr/local/apache2/htdocs/"
+    ports:
+      - "8080:80"
+  test-server:
+    image: node:latest
+    working_dir: "/app"
+    volumes:
+      - "./test-server:/app"
+    ports:
+      - "3000:3000"
+    command: npm start
