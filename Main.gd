@@ -1,15 +1,14 @@
 extends Node2D
 
-
-const START = "START"
-const HTTP_COMPLETE = "HTTP_COMPLETE"
+const HTTP_STARTED = "HTTP_STARTED"
+const HTTP_SUCCESS = "HTTP_SUCCESS"
+const HTTP_FAILURE = "HTTP_FAILURE"
 const REQUEST_STARTED = "REQUEST_STARTED"
 const REQUEST_COMPLETE = "REQUEST_COMPLETE"
 const STATUS_STARTED = "STATUS_STARTED"
 const STATUS_COMPLETE = "STATUS_COMPLETE"
 const RESPONSE_STARTED = "RESPONSE_STARTED"
 const RESPONSE_COMPLETE = "RESPONSE_COMPLETE"
-const COMPLETE = "COMPLETE"
 
 # PLACE REQUEST ANIMATIONS HERE
 onready var requestAnimations = [
@@ -42,14 +41,16 @@ var statusIndex = 0
 var responseIndex = 0
 var requestUrlIndex = 0
 
-var httpResponse
+var httpResponse = {
+	"statusCode": -1,
+	"hasBody": false,
+	"body": "",
+}
 
 # Prepare the visualisations by:
 # - Hiding all animations
 # - Connecting all animations' "complete" signal to the appropriate handler.
 func _ready():
-	_newState(START)
-	
 	for a in requestAnimations:
 		a.visible = false
 		a.connect("complete", self, "_onRequestComplete")
@@ -61,32 +62,37 @@ func _ready():
 	for a in responseAnimations:
 		a.visible = false
 		a.connect("complete", self, "_onResponseComplete")
+		
+	$HttpScene.connect("success", self, "_onHttpSuccess")
+	$HttpScene.connect("failure", self, "_onHttpFailure")
+		
+	_newState(HTTP_STARTED)
+	$HttpScene.visible = true
+	$HttpScene.start(requestUrls[requestUrlIndex])
 
 # Handle the program's state transitions by moving the state on every time
 # the spacebar key is pressed.
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		if (state == START):
-			_makeHttpRequest(requestUrls[requestUrlIndex])
-			
-		elif (state == HTTP_COMPLETE):
+	if Input.is_action_just_pressed("ui_accept"):			
+		if (state == HTTP_SUCCESS):
 			_newState(REQUEST_STARTED)
+			$HttpScene.visible = false
 			requestAnimations[requestIndex].visible = true
 			requestAnimations[requestIndex].start(requestUrls[requestUrlIndex])
 			
-		elif (state == REQUEST_COMPLETE):
-			if (httpResponse["statusCode"] == "0"):
-				_newState(RESPONSE_COMPLETE)
-			else:
-				_newState(STATUS_STARTED)
-				requestAnimations[requestIndex].visible = false
-				requestAnimations[requestIndex].stop()
+		elif (state == HTTP_FAILURE):
+			_quit()
 			
-				statusAnimations[statusIndex].visible = true
-				statusAnimations[statusIndex].start(httpResponse["statusCode"])
+		elif (state == REQUEST_COMPLETE):
+			_newState(STATUS_STARTED)
+			requestAnimations[requestIndex].visible = false
+			requestAnimations[requestIndex].stop()
+			
+			statusAnimations[statusIndex].visible = true
+			statusAnimations[statusIndex].start(httpResponse["statusCode"])
 			
 		elif (state == STATUS_COMPLETE):
-			if (httpResponse["body"].length() == 0):
+			if (!httpResponse["hasBody"]):
 				_newState(RESPONSE_COMPLETE)
 			else:
 				_newState(RESPONSE_STARTED)
@@ -107,7 +113,10 @@ func _process(_delta):
 				requestIndex += 1
 				statusIndex += 1
 				responseIndex += 1
-				_newState(START)
+				
+				_newState(HTTP_STARTED)
+				$HttpScene.visible = true
+				$HttpScene.start(requestUrls[requestUrlIndex])
 
 # Handlers for the animations' "complete" signals
 func _onRequestComplete():
@@ -118,43 +127,15 @@ func _onStatusComplete():
 	
 func _onResponseComplete():
 	_newState(RESPONSE_COMPLETE)
-
-# Make a HTTP request
-func _makeHttpRequest(url):
-	var http = HTTPRequest.new()
-	add_child(http)
-	http.connect("request_completed", self, "_onHttpComplete")	
 	
-	var error = http.request(url)
-	if (error != OK):
-		_quit() # TODO: Show an error scene
-
-# Handle HTTP response
-func _onHttpComplete(result, responseCode, _headers, body):
-	if (result != 0):
-		httpResponse = {
-			"statusCode": "0",
-			"body": "",
-		}
-		_newState(HTTP_COMPLETE)
-	elif (body.empty()):
-		httpResponse = {
-			"statusCode": str(responseCode),
-			"body": "",
-		}
-		_newState(HTTP_COMPLETE)		
-	else:
-		var pretty = ""
-		var parseResult = JSON.parse(body.get_string_from_utf8())
-		
-		if (parseResult.error == OK):
-			pretty = JSON.print(parseResult.result, "  ")
-			
-		httpResponse = {
-			"statusCode": str(responseCode),
-			"body": pretty
-		}
-		_newState(HTTP_COMPLETE)
+func _onHttpSuccess(statusCode, hasBody, body):
+	httpResponse["statusCode"] = statusCode
+	httpResponse["hasBody"] = hasBody
+	httpResponse["body"] = body
+	_newState(HTTP_SUCCESS)
+	
+func _onHttpFailure():
+	_newState(HTTP_FAILURE)
 		
 # Transition state
 func _newState(newState):

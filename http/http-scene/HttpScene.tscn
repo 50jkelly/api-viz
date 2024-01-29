@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://http/http-scene/UFO.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixel-font.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://http/space.png" type="Texture" id=3]
-[ext_resource path="res://http/ufo.png" type="Texture" id=4]
+[ext_resource path="res://http/http-scene/space.png" type="Texture" id=3]
+[ext_resource path="res://http/http-scene/ufo.png" type="Texture" id=4]
+[ext_resource path="res://http/http-scene/HttpScene.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -38,11 +39,13 @@ size = 28
 font_data = ExtResource( 2 )
 
 [node name="HttpScene" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 168, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 flip_v = true
 
@@ -50,12 +53,14 @@ flip_v = true
 position = Vector2( 512, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 855, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 flip_v = true
 
@@ -63,7 +68,7 @@ flip_v = true
 position = Vector2( 168, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 flip_h = true
 flip_v = true
@@ -72,7 +77,7 @@ flip_v = true
 position = Vector2( 512, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 flip_h = true
 
@@ -80,7 +85,7 @@ flip_h = true
 position = Vector2( 856, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 flip_v = true
 
