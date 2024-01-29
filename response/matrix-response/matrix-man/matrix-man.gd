@@ -3,9 +3,6 @@ extends Sprite
 # We will use this signal to indicate when the animation is complete.
 signal complete
 
-# We grab the footsteps node so we can control playback of the footsteps audio stream.
-onready var footsteps = get_node("Footsteps")
-
 # Used to control the length of the animation and audio playback
 var walkDuration = 1.5
 
@@ -17,7 +14,7 @@ func start():
 	timer.connect("timeout", self, "_onComplete")
 	
 	# Start the playback of the footsteps audio stream.
-	footsteps.play()
+	$Footsteps.play()
 	
 	# We define the end states of our walk animation. In this case, we want to change:
 	# 1. The position of the sprite.
@@ -38,7 +35,7 @@ func start():
 # signal.
 func _onComplete():
 	# Stop playback of the footsteps audio
-	footsteps.stop()
+	$Footsteps.stop()
 	
 	# Emit the "complete" signal, so other scenes can respond to this animation
 	# being completed.

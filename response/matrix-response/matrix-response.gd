@@ -2,36 +2,12 @@ extends Node2D
 
 signal complete
 
-# API response text
-var responseText = """{
-  "users": [
-	{
-	  "id": 1,
-	  "name": "John Doe",
-	  "email": "johndoe@example.com",
-	  "roles": ["user", "admin"],
-	  "isActive": true
-	},
-	{
-	  "id": 2,
-	  "name": "Jane Smith",
-	  "email": "janesmith@example.com",
-	  "roles": ["user"],
-	  "isActive": false
-	},
-	{
-	  "id": 3,
-	  "name": "Emily Johnson",
-	  "email": "emilyjohnson@example.com",
-	  "roles": ["user", "editor"],
-	  "isActive": true
-	}
-  ]
-}"""
-
 var textStartDelay = 0.4
+var responseText = ""
 
-func start():
+func start(inResponseText):
+	self.responseText = inResponseText
+	
 	# Connect all of our individual animation scenes' "complete" signal
 	# to corresponding handlers.
 	$MatrixMan.connect("complete", self, "_onMatrixManComplete")
@@ -45,6 +21,10 @@ func start():
 	
 	# Kick off the first animation in this scene.
 	$MatrixMan.start()
+	
+func stop():
+	$City.stop()
+	$Crowd.stop()
 	
 func _onMatrixManComplete():
 	$RedPill.start()
