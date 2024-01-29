@@ -4,7 +4,8 @@ const port = 3000
 
 app.get('/', (req, res) => {
   res.set("Access-Control-Allow-Origin", "*")
-  res.send({
+
+  const data ={
     message: {
         "users": [
           {
@@ -30,7 +31,9 @@ app.get('/', (req, res) => {
           }
         ]
       }
-  })
+  }
+
+  setTimeout(() => res.send(data), 3000)
 })
 
 app.listen(port, () => {
