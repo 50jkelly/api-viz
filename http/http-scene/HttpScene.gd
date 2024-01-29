@@ -4,32 +4,61 @@ signal success(statusCode, hasBody, body)
 signal failure
 
 func start(url):
+	$UFO.visible = true
+	$ThumbsDown.visible = false
+	$ThumbsUp.visible = false
+	$Control/SuccessMessage.visible = false
+	$Control/FailureMessage.visible = false
+	
 	var http = HTTPRequest.new()
 	add_child(http)
 	http.connect("request_completed", self, "_onComplete")	
 	
 	var error = http.request(url)
 	if (error != OK):
-		emit_signal("failure")
+		_failure()
 	
-func stop():
-	pass
+func _failure():
+	emit_signal("failure")
+	$UFO.visible = false
+	$ThumbsUp.visible = false
+	$Control/SuccessMessage.visible = false
+	
+	$ThumbsDown.scale *= 0.1
+	$ThumbsDown.visible = true
+	$Control/FailureMessage.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property($ThumbsDown, "scale", Vector2(0.4, 0.4), 1)
+		
+func _success(responseCode, hasBody, body):
+	emit_signal("success", responseCode, hasBody, body)
+	$UFO.visible = false
+	$ThumbsDown.visible = false
+	$Control/FailureMessage.visible = false
+	
+	$ThumbsUp.scale *= 0.1
+	$ThumbsUp.visible = true
+	$Control/SuccessMessage.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property($ThumbsUp, "scale", Vector2(0.4, 0.4), 1)
 	
 func _onComplete(result, responseCode, _headers, body):
 	if (result != 0):
-		emit_signal("failure")
+		_failure()
 		return
 		
 	if (body.empty()):
-		emit_signal("success", str(responseCode), false, "")
+		_success(str(responseCode), false, "")
 		return
 	
 	var pretty = ""
 	var parseResult = JSON.parse(body.get_string_from_utf8())
 		
 	if (parseResult.error != OK):
-		emit_signal("failure")
+		_failure()
 		return
 			
 	pretty = JSON.print(parseResult.result, "  ")
-	emit_signal("success", str(responseCode), true, pretty)
+	_success(str(responseCode), true, pretty)
