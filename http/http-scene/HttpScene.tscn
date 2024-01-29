@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://http/http-scene/UFO.gd" type="Script" id=1]
+[ext_resource path="res://fonts/pixel-font.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://http/space.png" type="Texture" id=3]
+[ext_resource path="res://http/ufo.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=6]
+size = 28
+font_data = ExtResource( 2 )
+
+[node name="HttpScene" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 168, 168 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+playing = true
+flip_v = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 512, 168 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 855, 168 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+playing = true
+flip_v = true
+
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
+position = Vector2( 168, 512 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+flip_h = true
+flip_v = true
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
+position = Vector2( 512, 512 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+flip_h = true
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
+position = Vector2( 856, 512 )
+scale = Vector2( 5.375, 5.375 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+flip_v = true
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Label" type="Label" parent="Control"]
+margin_top = 100.0
+margin_right = 1024.0
+custom_fonts/font = SubResource( 6 )
+text = "Sending HTTP request..."
+align = 1
+
+[node name="UFO" type="Sprite" parent="."]
+position = Vector2( 512, 280 )
+scale = Vector2( 0.388889, 0.388889 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
