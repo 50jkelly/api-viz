@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*")
   res.send({
     message: {
         "users": [
