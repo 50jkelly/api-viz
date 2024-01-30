@@ -18,7 +18,7 @@ onready var requestAnimations = [
 
 # PLACE STATUS ANIMATIONS HERE
 onready var statusAnimations = [
-	$TestStatus,
+	$TraitorsStatus,
 	$TestStatus,
 ]
 
