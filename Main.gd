@@ -76,6 +76,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):			
 		if (state == HTTP_SUCCESS):
 			_newState(REQUEST_STARTED)
+			$HttpScene.stop()
 			$HttpScene.visible = false
 			requestAnimations[requestIndex].visible = true
 			requestAnimations[requestIndex].start(requestUrls[requestUrlIndex])

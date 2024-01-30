@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://http/http-scene/UFO.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixel-font.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://http/http-scene/HttpScene.gd" type="Script" id=5]
 [ext_resource path="res://http/http-scene/thumbs-down.png" type="Texture" id=6]
 [ext_resource path="res://http/http-scene/thumbs-up.png" type="Texture" id=7]
+[ext_resource path="res://http/http-scene/stars-and-sines.wav" type="AudioStream" id=8]
+[ext_resource path="res://http/http-scene/bleep-success.mp3" type="AudioStream" id=9]
+[ext_resource path="res://http/http-scene/buzzer-fail.wav" type="AudioStream" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -51,7 +54,7 @@ script = ExtResource( 5 )
 position = Vector2( 168, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true
 flip_v = true
 
@@ -59,14 +62,14 @@ flip_v = true
 position = Vector2( 512, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 855, 168 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true
 flip_v = true
 
@@ -74,6 +77,7 @@ flip_v = true
 position = Vector2( 168, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
+frame = 1
 playing = true
 flip_h = true
 flip_v = true
@@ -82,6 +86,7 @@ flip_v = true
 position = Vector2( 512, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
+frame = 1
 playing = true
 flip_h = true
 
@@ -89,7 +94,6 @@ flip_h = true
 position = Vector2( 856, 512 )
 scale = Vector2( 5.375, 5.375 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
 flip_v = true
 
@@ -141,3 +145,12 @@ visible = false
 position = Vector2( 512, 320 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 6 )
+
+[node name="StarsAndSines" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="BleepSuccess" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="BuzzerFailure" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )

@@ -4,6 +4,8 @@ signal success(statusCode, hasBody, body)
 signal failure
 
 func start(url):
+	$StarsAndSines.play()
+	
 	$UFO.visible = true
 	$ThumbsDown.visible = false
 	$ThumbsUp.visible = false
@@ -17,6 +19,13 @@ func start(url):
 	var error = http.request(url)
 	if (error != OK):
 		_failure()
+		
+
+
+func stop():
+	$StarsAndSines.stop()
+	$BleepSuccess.stop()
+	$BuzzerFailure.stop()
 	
 func _failure():
 	emit_signal("failure")
@@ -24,6 +33,7 @@ func _failure():
 	$ThumbsUp.visible = false
 	$Control/SuccessMessage.visible = false
 	
+	$BuzzerFailure.play()
 	$ThumbsDown.scale *= 0.1
 	$ThumbsDown.visible = true
 	$Control/FailureMessage.visible = true
@@ -37,6 +47,7 @@ func _success(responseCode, hasBody, body):
 	$ThumbsDown.visible = false
 	$Control/FailureMessage.visible = false
 	
+	$BleepSuccess.play()
 	$ThumbsUp.scale *= 0.1
 	$ThumbsUp.visible = true
 	$Control/SuccessMessage.visible = true
