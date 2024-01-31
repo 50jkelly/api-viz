@@ -80,7 +80,7 @@ script = ExtResource( 12 )
 wait_time = 0.05
 
 [node name="CompleteTimer" type="Timer" parent="DialogBox"]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="Control" type="Control" parent="DialogBox"]
 margin_left = -609.0

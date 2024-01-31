@@ -1,0 +1,196 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://request/laser-request/background.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=5]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Background" type="Node2D"]
+
+[node name="Background1" type="AnimatedSprite" parent="."]
+position = Vector2( 94, 95.96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background2" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="Background3" type="AnimatedSprite" parent="."]
+position = Vector2( 480, 96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="Background4" type="AnimatedSprite" parent="."]
+position = Vector2( 672, 96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background5" type="AnimatedSprite" parent="."]
+position = Vector2( 864, 96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background16" type="AnimatedSprite" parent="."]
+position = Vector2( 1056, 96 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background6" type="AnimatedSprite" parent="."]
+position = Vector2( 96, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background7" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background8" type="AnimatedSprite" parent="."]
+position = Vector2( 480, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background9" type="AnimatedSprite" parent="."]
+position = Vector2( 672, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="Background10" type="AnimatedSprite" parent="."]
+position = Vector2( 864, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background17" type="AnimatedSprite" parent="."]
+position = Vector2( 1056, 296 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background18" type="AnimatedSprite" parent="."]
+position = Vector2( 1056, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background19" type="AnimatedSprite" parent="."]
+position = Vector2( 96, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background20" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background21" type="AnimatedSprite" parent="."]
+position = Vector2( 480, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background22" type="AnimatedSprite" parent="."]
+position = Vector2( 672, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="Background23" type="AnimatedSprite" parent="."]
+position = Vector2( 864, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="Background24" type="AnimatedSprite" parent="."]
+position = Vector2( 1056, 696 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background11" type="AnimatedSprite" parent="."]
+position = Vector2( 96, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Background12" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background13" type="AnimatedSprite" parent="."]
+position = Vector2( 480, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background14" type="AnimatedSprite" parent="."]
+position = Vector2( 672, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Background15" type="AnimatedSprite" parent="."]
+position = Vector2( 864, 496 )
+scale = Vector2( 3.0625, 3.12375 )
+frames = SubResource( 5 )
+frame = 3
+playing = true

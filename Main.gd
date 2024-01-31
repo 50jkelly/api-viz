@@ -12,7 +12,7 @@ const RESPONSE_COMPLETE = "RESPONSE_COMPLETE"
 
 # PLACE REQUEST ANIMATIONS HERE
 onready var requestAnimations = [
-	$TestRequest,
+	$LaserRequest,
 	$TestRequest,
 ]
 
