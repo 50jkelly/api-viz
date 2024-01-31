@@ -13,25 +13,21 @@ const RESPONSE_COMPLETE = "RESPONSE_COMPLETE"
 # PLACE REQUEST ANIMATIONS HERE
 onready var requestAnimations = [
 	$LaserRequest,
-	$TestRequest,
 ]
 
 # PLACE STATUS ANIMATIONS HERE
 onready var statusAnimations = [
 	$TraitorsStatus,
-	$TestStatus,
 ]
 
 # PLACE RESPONSE ANIMATIONS HERE
 onready var responseAnimations = [
-	$MatrixResponse,
 	$MatrixResponse,
 ]
 
 # PLACE HTTP REQUEST DETAILS HERE
 var requestUrls = [
 	"http://localhost:3000",
-	"http://localhost:3000/oops"
 ]
 
 var state

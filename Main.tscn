@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://response/matrix-response/matrix-response.tscn" type="PackedScene" id=2]
-[ext_resource path="res://status/test-status/test-status.tscn" type="PackedScene" id=3]
-[ext_resource path="res://request/test-request/test-request.tscn" type="PackedScene" id=4]
 [ext_resource path="res://http/http-scene/HttpScene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://status/traitors-status/traitors-status.tscn" type="PackedScene" id=6]
 [ext_resource path="res://request/laser-request/laser-request.tscn" type="PackedScene" id=7]
@@ -15,11 +13,7 @@ script = ExtResource( 1 )
 
 [node name="TraitorsStatus" parent="." instance=ExtResource( 6 )]
 
-[node name="TestStatus" parent="." instance=ExtResource( 3 )]
-
 [node name="LaserRequest" parent="." instance=ExtResource( 7 )]
-
-[node name="TestRequest" parent="." instance=ExtResource( 4 )]
 
 [node name="MatrixResponse" parent="." instance=ExtResource( 2 )]
 
